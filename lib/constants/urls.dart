@@ -1,3 +1,3 @@
 class Urls {
-  static String apiBaseUrl = "https://collab-notes-xxbl.onrender.com/api";
+  static String apiBaseUrl = "MY_NODE_API_URL";
 }
