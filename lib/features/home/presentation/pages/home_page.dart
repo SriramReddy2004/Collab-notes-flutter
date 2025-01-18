@@ -14,8 +14,8 @@ class HomePage extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.primary,
       ),
       drawer: const MyDrawer(),
-      body: const Padding(
-        padding: EdgeInsets.only(
+      body: Padding(
+        padding: const EdgeInsets.only(
           top: 10,
           left: 10,
           right: 10,
@@ -32,15 +32,15 @@ class HomePage extends StatelessWidget {
             ),
             NoteCard(
               text: "Editable Notes",
-              route: "/get-readable-notes-of-a-user",
-              isOwn: false,
-              isWritable: false
-            ),
-            NoteCard(
-              text: "Readable Notes",
               route: "/get-editable-notes-of-a-user",
               isOwn: false,
               isWritable: true
+            ),
+            NoteCard(
+              text: "Readable Notes",
+              route: "/get-readable-notes-of-a-user",
+              isOwn: false,
+              isWritable: false
             ),
           ],
         ),

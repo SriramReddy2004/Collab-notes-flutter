@@ -6,6 +6,13 @@ class NoteInitial extends NoteState {}
 
 class NotesLoading extends NoteState {}
 
+class NoteSaving extends NoteState{}
+
+class NoteSuccess extends NoteState{
+  String message;
+  NoteSuccess(this.message);
+}
+
 class NotesLoaded extends NoteState {
   List<Note> notes;
   NotesLoaded(this.notes);

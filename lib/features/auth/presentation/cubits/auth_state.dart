@@ -13,6 +13,11 @@ class Authenticated extends AuthState {
   Authenticated(this.user);
 }
 
+class AuthSuccess extends AuthState{
+  final String message;
+  AuthSuccess(this.message);
+}
+
 class Unauthenticated extends AuthState {}
 
 class AuthError extends AuthState {

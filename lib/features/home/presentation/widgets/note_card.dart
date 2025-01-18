@@ -1,5 +1,10 @@
+import 'package:bloc_sm/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:bloc_sm/features/notes/data/node_note_repository.dart';
+import 'package:bloc_sm/features/notes/domain/repositories/note_repository.dart';
+import 'package:bloc_sm/features/notes/presentation/cubits/note_cubit.dart';
 import 'package:bloc_sm/features/notes/presentation/pages/notes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoteCard extends StatelessWidget {
 
@@ -8,7 +13,7 @@ class NoteCard extends StatelessWidget {
   final bool isOwn;
   final bool isWritable;
 
-  const NoteCard({
+  NoteCard({
     super.key,
     required this.text,
     required this.route,
@@ -16,11 +21,13 @@ class NoteCard extends StatelessWidget {
     required this.isWritable
   });
 
+
+  final NoteRepository noteRepository = NodeNoteRepository();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => NotesPage(route: route, isOwn: isOwn, isWritable: isWritable, notesType: text)));
+        Navigator.push(context, MaterialPageRoute(builder: (_) => BlocProvider.value(value: NoteCubit(noteRepository)..getAllNotesOfaUserBasedonRoute(route, context.read<AuthCubit>().currentUser!.token),child: NotesPage(route: route, isOwn: isOwn, isWritable: isWritable, notesType: text))));
       },
       child: Container(
         width: double.infinity,

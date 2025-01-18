@@ -4,6 +4,8 @@ import 'package:bloc_sm/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:bloc_sm/features/auth/presentation/cubits/auth_state.dart';
 import 'package:bloc_sm/features/auth/presentation/pages/auth_page.dart';
 import 'package:bloc_sm/features/home/presentation/pages/home_page.dart';
+import 'package:bloc_sm/features/notes/data/node_note_repository.dart';
+import 'package:bloc_sm/features/notes/domain/repositories/note_repository.dart';
 import 'package:bloc_sm/themes/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final AuthRepository authRepository = NodeAuthRepository();
+  final NoteRepository noteRepository = NodeNoteRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,10 @@ class MyApp extends StatelessWidget {
               return const HomePage();
             },
             listener: (context, authState) {
-              if(authState is AuthError) {
+              if(authState is AuthSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(authState.message)));
+              }
+              else if(authState is AuthSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(authState.message)));
               }
             },

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc_sm/constants/urls.dart';
 import 'package:bloc_sm/features/notes/domain/entities/note.dart';
 import 'package:bloc_sm/features/notes/domain/repositories/note_repository.dart';
+import 'package:bloc_sm/utils/internet_connection_error.dart';
 import 'package:http/http.dart' as http;
 
 class NodeNoteRepository extends NoteRepository {
@@ -11,7 +12,7 @@ class NodeNoteRepository extends NoteRepository {
   Future<List<Note>> getAllNotesOfaUserBasedonRoute(String route, String token) async {
     try {
       final response = await http.post(
-        Uri.parse("${Urls.apiBaseUrl}/$route"),
+        Uri.parse("${Urls.apiBaseUrl}$route"),
         headers: {
           "Content-Type": "application/json",
         },
@@ -40,7 +41,7 @@ class NodeNoteRepository extends NoteRepository {
       }
     }
     catch(e) {
-      rethrow;
+      throw checkInternetConnectionError(e);
     }
   }
 
@@ -75,7 +76,7 @@ class NodeNoteRepository extends NoteRepository {
 
     }
     catch(e) {
-      rethrow;
+      throw checkInternetConnectionError(e);
     }
   }
 
@@ -110,7 +111,7 @@ class NodeNoteRepository extends NoteRepository {
 
     }
     catch(e) {
-      rethrow;
+      throw checkInternetConnectionError(e);
     }
   }
 
@@ -135,7 +136,7 @@ class NodeNoteRepository extends NoteRepository {
       }
     }
     catch(e) {
-      rethrow;
+      throw checkInternetConnectionError(e);
     }
   }
 
